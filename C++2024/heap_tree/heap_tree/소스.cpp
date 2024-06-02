@@ -149,7 +149,7 @@ void enqueue(PriorityQueue* queue, Node* node) {
 		return;
 	}
 	int i = queue->size;
-	while (i > 0 && node->frequency > queue->nodes[i - 1]->frequency) {
+	while (i > 0 && node->frequency < queue->nodes[i - 1]->frequency) {
 		queue->nodes[i] = queue->nodes[i - 1];
 		i--;
 	}
@@ -234,12 +234,34 @@ frequency get_frequency(char arr[], int size) {
 	return char_n_freq;
 }
 
+void printTopKFrequentElements(char arr[], int k) {
+
+	frequency ex_freq = get_frequency(arr, strlen(arr));;
+
+	PriorityQueue* ex_queue = createPriorityQueue();
+
+	for (int i = 0; i < ex_freq.length; i++) {
+		Node* temp_node = createNode(ex_freq.character[i], ex_freq.freq[i], NULL, NULL);
+		enqueue(ex_queue, temp_node);
+	}
+	printf("----------------------------------------------\n");
+	for (int i = 0; i < k; i++) {
+		Node* temp_node = dequeue(ex_queue);
+		printf("문자 : %c 빈도수 %d\n", temp_node->character, temp_node->frequency);
+	}
+	printf("----------------------------------------------\n");
+	free(ex_queue);
+	free(ex_freq.character);
+	free(ex_freq.freq);
+}
+
 int main(void) {
 	element arr[] = { 5, 9, 2, 7, 1, 6 };
 	element arr1[] = { 5, 9, 2, 7, 1, 6 , 4 ,5 , 10 , 51 , 100};
 	element arr2[] = { 12,14,26,38,29,40,55,57,8,66 };
 	char ex_str[] = "Outmanned and outgunned:";
-	frequency ex_freq;
+	char ex_str1[] = "Red Zepplin , Guns and Roses , Queen :)";
+	char ex_str2[] = "sykim gsyang jgann mhkim sgkim";
 	int k = 3;    // k번째로 큰 요소
 
 	/*  heap에 arr 원소들을 하나씩 삽입 한 후
@@ -250,12 +272,9 @@ int main(void) {
 	printf("배열에서 %d번째로 큰 요소: %d\n", k, kthLargest);
 	printf("배열에서 %d번째로 큰 요소: %d\n", k, kthLargest1);
 	printf("배열에서 %d번째로 큰 요소: %d\n", k, kthLargest2);
-	ex_freq = get_frequency(ex_str, strlen(ex_str));
-	for (int i = 0; i <  ex_freq.length; i++) {
-	
-		printf("요소 값 : %c %d\n", ex_freq.character[i],ex_freq.freq[i]);
 
-	}
-	free(ex_freq.freq);
-	free(ex_freq.character);
+
+	printTopKFrequentElements(ex_str, 3);
+	printTopKFrequentElements(ex_str1, 3);
+	printTopKFrequentElements(ex_str2, 3);
 }
