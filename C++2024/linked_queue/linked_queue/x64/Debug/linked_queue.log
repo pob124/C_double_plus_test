@@ -1,0 +1,3 @@
+﻿  소스.cpp
+E:\C++2024\linked_queue\linked_queue\소스.cpp(18,2): warning C4091: 'typedef ': 변수를 선언하지 않으면 'DequeNodeType' 왼쪽은 무시됩니다.
+  linked_queue.vcxproj -> E:\C++2024\linked_queue\x64\Debug\linked_queue.exe

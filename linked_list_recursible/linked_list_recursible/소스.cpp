@@ -402,19 +402,21 @@ int main(void) {
 	cout << endl << "최댓값 : " << head3->data;
 	print_list(head3);
 	head = sort_list(head);
+	cout << "리스트 정렬됨" << "(주소" << &head << ") : ";;
 	print_list(head);
+	cout << "병합될 리스트" << "(주소" << &head2  << ") : ";
 	print_list(head2);
 	head2 = sort_list(head2);
 	merging_head = merge(head, head2);
-	cout << "병합된 리스트 : ";
+	cout << "병합된 리스트"<< "(주소" << &merging_head  << "): ";
 	print_list(merging_head);
 
 	odd_list = extract_odd(to_ten_head);
 	to_ten_head = sort_list(to_ten_head);
 
-	cout << "추출된 리스트 : ";
+	cout << "추출된 리스트" << "(주소" << &odd_list << "): ";
 	print_list(odd_list);
-	cout << "원래 리스트 : ";
+	cout << "원래 리스트 : " << "(주소" << &to_ten_head << "): ";
 	print_list(to_ten_head);
 	return 0;
 
