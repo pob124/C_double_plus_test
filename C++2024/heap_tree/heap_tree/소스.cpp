@@ -161,16 +161,18 @@ element delete_m_heap(HeapType* h) {
 
 	h->heap[parent] = temp;
 
-	for (int i = 1; i <= h->heap_size; i++) {
+	if (h->heap->machineNum > 0) {
+		for (int i = 1; i <= h->heap_size; i++) {
 
-		if (h->heap[i].key == h->heap[i - 1].key && (h->heap[i].machineNum < h->heap[i-1].machineNum && (h->heap[i].key == 0))) {
-			element temp_element1 = h->heap[i];
-			element temp_element2 = h->heap[i-1];
-			h->heap[i] = temp_element2;
-			h->heap[i-1] = temp_element1;
+			if (h->heap[i].key == h->heap[i - 1].key && (h->heap[i].machineNum < h->heap[i - 1].machineNum && (h->heap[i].key == 0))) {
+				element temp_element1 = h->heap[i];
+				element temp_element2 = h->heap[i - 1];
+				h->heap[i] = temp_element2;
+				h->heap[i - 1] = temp_element1;
+			}
+
+
 		}
-
-
 	}
 
 		// 최댓값(루트 노드 값)을 반환
@@ -233,7 +235,7 @@ void enqueue(PriorityQueue* queue, Node* node) {
 		return;
 	}
 	int i = queue->size;
-	while (i > 0 && node->frequency < queue->nodes[i - 1]->frequency) {
+	while (i > 0 && node->frequency > queue->nodes[i - 1]->frequency) {
 		queue->nodes[i] = queue->nodes[i - 1];
 		i--;
 	}
@@ -856,6 +858,20 @@ void testingSJF(int jobs[], int numOfJobs, int numOfMachines) {
 	cout << "--------------------------------------------------------------------------------" << endl;
 }
 
+void testingHFM(char ch[], int freq[], int size) {
+	cout << "------------------ HFM(HuFfMan) 코드 TEST ----------------------" << endl;
+	PriorityQueue* queue = createPriorityQueue();
+	for (int i = 0; i < size; i++) {
+		Node* node = createNode(ch[i], freq[i], NULL, NULL);
+		enqueue(queue, node); // 빈도 기반으로 삽입
+	}
+	Node* root = buildHuffmanTree(queue);
+	// 허프만 코드 출력
+	generateHuffmanCodes(root, 0, 0);
+
+	cout << "-----------------------------------------------------" << endl;
+}
+
 
 int main(void) {
 	element arr[] = { 5, 9, 2, 7, 1, 6 };
@@ -871,6 +887,11 @@ int main(void) {
 	char ex_str1[] = "Red Zepplin , Guns and Roses , Queen :)";
 	char ex_str2[] = "sykim gsyang jgann mhkim sgkim";
 	char ch[] = { 's', 'i', 'n', 't', 'e' };
+	int freq[] = { 4, 6, 8, 12, 15 };
+	char ch1[] = { 'a', 'b', 'c', 'd', 'e' , 'f', 'g', 'h' };
+	int freq1[] = { 24, 4, 5, 15, 7, 30, 2, 6 };
+	char ch2[] = { 'a', 'b', 'c', 'd', 'e' , 'f', 'g', 'h', 'i', 'j'};
+	int freq2[] = { 25, 3, 5, 10, 8, 30, 2, 7, 20, 13 };
 	int k = 3;    // k번째로 큰 요소
 
 	/*  heap에 arr 원소들을 하나씩 삽입 한 후
@@ -888,13 +909,18 @@ int main(void) {
 	//printTopKFrequentElements(ex_str2, 3);
 	//testingLPT(arr5, 10, 3);
 	///testingSJF(arr5, 10, 3);
-	//testingLPT(arr6, 13, 4);
-	//testingSJF(arr6, 13, 4);
-	testingLPT(arr7, 22, 5);
-	testingSJF(arr7, 22, 5);
+	testingLPT(arr6, 13, 4);
+	testingSJF(arr6, 13, 4);
+	//testingLPT(arr7, 22, 5);
+	//testingSJF(arr7, 22, 5);
 	// cout << averageWatingTimeSJF(arr4, 6, 3) << endl;
 	//testingLPT(arr4, 6, 3);
 	//testingSJF(arr4, 6, 3);
 	//testingLPT(testArr, 7, 3);
-	
+	  // 빈 우선순위 큐 생성
+	PriorityQueue* queue = createPriorityQueue();
+	// 각 문자와 빈도를 우선순위 큐에 삽입
+	testingHFM(ch, freq, sizeof(ch)/sizeof(char));
+	testingHFM(ch1, freq1, sizeof(ch1) / sizeof(char));
+	testingHFM(ch2, freq2, sizeof(ch2) / sizeof(char));
 }
