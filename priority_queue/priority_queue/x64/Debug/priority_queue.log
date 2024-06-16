@@ -1,0 +1,5 @@
+﻿  machine_schedule.cpp
+C:\Users\hch31\source\repos\C_double_plus_test\priority_queue\priority_queue\machine_schedule.cpp(108,6): warning C4101: 'i' :참조되지 않은 지역 변수입니다.
+C:\Users\hch31\source\repos\C_double_plus_test\priority_queue\priority_queue\machine_schedule.cpp(231,23): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\hch31\source\repos\C_double_plus_test\priority_queue\priority_queue\machine_schedule.cpp(305,23): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  priority_queue.vcxproj -> C:\Users\hch31\source\repos\C_double_plus_test\priority_queue\x64\Debug\priority_queue.exe
